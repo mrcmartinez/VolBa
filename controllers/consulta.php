@@ -31,15 +31,22 @@ class Consulta extends Controller{
         $id_personal = $_SESSION['id_verPersonal'];
         $nombre    = $_POST['nombre'];
         $estatus  = $_POST['estatus'];
+        $apellido_paterno = $_POST['apellido_paterno'];
+        $apellido_materno = $_POST['apellido_materno'];
 
         unset($_SESSION['id_verPersonal']);
 
-        if($this->model->update(['id_personal' => $id_personal, 'nombre' => $nombre, 'estatus' => $estatus] )){
+        if($this->model->update(['id_personal' => $id_personal, 'nombre' => $nombre, 'estatus' => $estatus,
+         'apellido_paterno' => $apellido_paterno,
+         'apellido_materno' => $apellido_materno] )){
             // actualizar Personal exito
             $personal = new Personal();
             $personal->id_personal = $id_personal;
             $personal->nombre = $nombre;
             $personal->estatus = $estatus;
+            $personal->apellido_paterno = $apellido_paterno;
+            $personal->apellido_materno = $apellido_materno;
+            // mostrar los que se actualizaron
             
             $this->view->personal = $personal;
             $this->view->mensaje = "Personal actualizado correctamente";

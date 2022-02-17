@@ -19,9 +19,21 @@ class ConsultaModel extends Model{
             while($row = $query->fetch()){
                 $item = new Personal();
                 $item->id_personal = $row['id_personal'];
+                // $item->nombre = $row['nombre'];
+                // $item->apellido_paterno = $row['apellido_paterno'];
+                // $item->apellido_materno = $row['apellido_materno'];
+                // $item->calle = $row['calle'];
+                // $item->colonia = $row['colonia'];
+                // $item->numero_exterior = $row['numero_exterior'];
+                // $item->edad = $row['edad'];
+                // $item->fecha_nacimiento = $row['fecha_nacimiento'];
+                // $item->estado_civil = $row['estado_civil'];
+                // $item->numero_hijos = $row['numero_hijos'];
+                // $item->escolaridad = $row['escolaridad'];
                 $item->estatus = $row['estatus'];
                 $item->completo = $row['nombreConcat'];
                 array_push($items, $item);
+                //         
             }
             //  $this->view->$completo;
             return $items;
@@ -40,8 +52,17 @@ class ConsultaModel extends Model{
             while($row = $query->fetch()){
                 $item->id_personal = $row['id_personal'];
                 $item->nombre = $row['nombre'];
+                $item->apellido_paterno = $row['apellido_paterno'];
                 $item->estatus = $row['estatus'];
-
+                $item->apellido_materno = $row['apellido_materno'];
+                $item->calle = $row['calle'];
+                $item->colonia = $row['colonia'];
+                $item->numero_exterior = $row['numero_exterior'];
+                $item->edad = $row['edad'];
+                $item->fecha_nacimiento = $row['fecha_nacimiento'];
+                $item->estado_civil = $row['estado_civil'];
+                $item->numero_hijos = $row['numero_hijos'];
+                $item->escolaridad = $row['escolaridad'];
             }
 
             return $item;
@@ -51,12 +72,14 @@ class ConsultaModel extends Model{
     }
 
     public function update($item){
-        $query = $this->db->connect()->prepare("UPDATE personal SET nombre = :nombre, estatus = :estatus WHERE id_personal = :id_personal");
+        $query = $this->db->connect()->prepare("UPDATE personal SET nombre = :nombre, estatus = :estatus, 
+        apellido_paterno = :apellido_paterno WHERE id_personal = :id_personal");
         try{
             $query->execute([
                 'id_personal'=> $item['id_personal'],
                 'nombre'=> $item['nombre'],
-                'estatus'=> $item['estatus']
+                'estatus'=> $item['estatus'],
+                'apellido_paterno'=> $item['apellido_paterno']
             ]);
             return true;
         }catch(PDOException $e){
@@ -65,10 +88,10 @@ class ConsultaModel extends Model{
     }
 
     public function delete($id){
-        $query = $this->db->connect()->prepare("DELETE FROM personal WHERE id_personal = :id");
+        $query = $this->db->connect()->prepare("DELETE FROM personal WHERE id_personal = :id_personal");
         try{
             $query->execute([
-                'id'=> $id,
+                'id_personal'=> $id,
             ]);
             return true;
         }catch(PDOException $e){
