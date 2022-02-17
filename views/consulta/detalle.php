@@ -10,23 +10,23 @@
     <?php require 'views/header.php'; ?>
 
     <div id="main">
-        <h1 class="center">Detalle de <?php echo $this->personal->matricula; ?> </h1>
+        <h1 class="center">Detalle de <?php echo $this->personal->id_personal; ?> </h1>
 
         <div class="center"><?php echo $this->mensaje; ?></div>
 
         <form action="<?php echo constant('URL'); ?>consulta/actualizarPersonal" method="POST">
 
             <p>
-                <label for="matricula">Matrícula</label><br>
-                <input type="text" name="matricula" disabled value="<?php echo $this->personal->matricula; ?>" required>
+                <label for="id_personal">ID</label><br>
+                <input type="number" name="id_personal" disabled value="<?php echo $this->personal->id_personal; ?>" required>
             </p>
             <p>
                 <label for="nombre">Nombre</label><br>
                 <input type="text" name="nombre" value="<?php echo $this->personal->nombre; ?>" required>
             </p>
             <p>
-                <label for="apellido">Apellido</label><br>
-                <input type="text" name="apellido" value="<?php echo $this->personal->apellido; ?>" required>
+                <label for="estatus">estatus</label><br>
+                <input type="text" name="estatus" value="<?php echo $this->personal->estatus; ?>" required>
             </p>
 
             <p>

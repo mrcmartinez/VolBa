@@ -13,17 +13,17 @@ class ConsultaModel extends Model{
 
         try{
 
-            $query = $this->db->connect()->query("SELECT*FROM alumnos");
+            $query = $this->db->connect()->query("SELECT concat_ws(' ', apellido_paterno, apellido_materno,
+                                                                    nombre) as nombreConcat,id_personal,estatus FROM personal;");
 
             while($row = $query->fetch()){
                 $item = new Personal();
-                $item->matricula = $row['matricula'];
-                $item->nombre    = $row['nombre'];
-                $item->apellido  = $row['apellido'];
-
+                $item->id_personal = $row['id_personal'];
+                $item->estatus = $row['estatus'];
+                $item->completo = $row['nombreConcat'];
                 array_push($items, $item);
             }
-
+            //  $this->view->$completo;
             return $items;
         }catch(PDOException $e){
             return [];
@@ -33,14 +33,15 @@ class ConsultaModel extends Model{
     public function getById($id){
         $item = new Personal();
 
-        $query = $this->db->connect()->prepare("SELECT * FROM alumnos WHERE matricula = :matricula");
+        $query = $this->db->connect()->prepare("SELECT * FROM personal WHERE id_personal = :id_personal");
         try{
-            $query->execute(['matricula' => $id]);
+            $query->execute(['id_personal' => $id]);
 
             while($row = $query->fetch()){
-                $item->matricula = $row['matricula'];
+                $item->id_personal = $row['id_personal'];
                 $item->nombre = $row['nombre'];
-                $item->apellido = $row['apellido'];
+                $item->estatus = $row['estatus'];
+
             }
 
             return $item;
@@ -50,12 +51,12 @@ class ConsultaModel extends Model{
     }
 
     public function update($item){
-        $query = $this->db->connect()->prepare("UPDATE alumnos SET nombre = :nombre, apellido = :apellido WHERE matricula = :matricula");
+        $query = $this->db->connect()->prepare("UPDATE personal SET nombre = :nombre, estatus = :estatus WHERE id_personal = :id_personal");
         try{
             $query->execute([
-                'matricula'=> $item['matricula'],
+                'id_personal'=> $item['id_personal'],
                 'nombre'=> $item['nombre'],
-                'apellido'=> $item['apellido']
+                'estatus'=> $item['estatus']
             ]);
             return true;
         }catch(PDOException $e){
@@ -64,7 +65,7 @@ class ConsultaModel extends Model{
     }
 
     public function delete($id){
-        $query = $this->db->connect()->prepare("DELETE FROM alumnos WHERE matricula = :id");
+        $query = $this->db->connect()->prepare("DELETE FROM personal WHERE id_personal = :id");
         try{
             $query->execute([
                 'id'=> $id,

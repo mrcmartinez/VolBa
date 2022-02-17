@@ -6,7 +6,7 @@ class Consulta extends Controller{
         parent::__construct();
         $this->view->personal = [];
         
-        //echo "<p>Nuevo controlador Main</p>";
+        //echo "<p>Nuevo controlador Inicio</p>";
     }
 
     function render(){
@@ -20,7 +20,7 @@ class Consulta extends Controller{
         $personal = $this->model->getById($idPersonal);
 
         session_start();
-        $_SESSION['id_verPersonal'] = $personal->matricula;
+        $_SESSION['id_verPersonal'] = $personal->id_personal;
         $this->view->personal = $personal;
         $this->view->mensaje = "";
         $this->view->render('consulta/detalle');
@@ -28,18 +28,18 @@ class Consulta extends Controller{
 
     function actualizarPersonal(){
         session_start();
-        $matricula = $_SESSION['id_verPersonal'];
+        $id_personal = $_SESSION['id_verPersonal'];
         $nombre    = $_POST['nombre'];
-        $apellido  = $_POST['apellido'];
+        $estatus  = $_POST['estatus'];
 
         unset($_SESSION['id_verPersonal']);
 
-        if($this->model->update(['matricula' => $matricula, 'nombre' => $nombre, 'apellido' => $apellido] )){
+        if($this->model->update(['id_personal' => $id_personal, 'nombre' => $nombre, 'estatus' => $estatus] )){
             // actualizar Personal exito
             $personal = new Personal();
-            $personal->matricula = $matricula;
+            $personal->id_personal = $id_personal;
             $personal->nombre = $nombre;
-            $personal->apellido = $apellido;
+            $personal->estatus = $estatus;
             
             $this->view->personal = $personal;
             $this->view->mensaje = "Personal actualizado correctamente";
@@ -51,9 +51,9 @@ class Consulta extends Controller{
     }
 
     function eliminarPersonal($param = null){
-        $matricula = $param[0];
+        $id_personal = $param[0];
 
-        if($this->model->delete($matricula)){
+        if($this->model->delete($id_personal)){
             //$this->view->mensaje = "Personal eliminado correctamente";
             $mensaje = "Personal eliminado correctamente";
         }else{

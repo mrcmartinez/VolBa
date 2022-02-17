@@ -4,7 +4,7 @@ class Inicio extends Controller{
 
     function __construct(){
         parent::__construct();
-        //echo "<p>Nuevo controlador Main</p>";
+        //echo "<p>Nuevo controlador Inicio</p>";
     }
 
     function render(){

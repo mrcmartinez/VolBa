@@ -16,9 +16,9 @@
         <table width="100%">
             <thead>
                 <tr>
-                    <th>Matrícula</th>
+                    <th>ID</th>
                     <th>Nombre</th>
-                    <th>Apellido</th>
+                    <th>ESTATUS</th>
                 </tr>
             </thead>
             <tbody id="tbody-personal">
@@ -28,14 +28,14 @@
                         $personal = new Personal();
                         $personal = $row; 
                 ?>
-                <tr id="fila-<?php echo $personal->matricula; ?>">
-                    <td><?php echo $personal->matricula; ?></td>
-                    <td><?php echo $personal->nombre; ?></td>
-                    <td><?php echo $personal->apellido; ?></td>
+                <tr id="fila-<?php echo $personal->id_personal; ?>">
+                    <td><?php echo $personal->id_personal; ?></td>
+                    <td><?php echo $personal->completo; ?></td>
+                    <td><?php echo $personal->estatus; ?></td>
                     
-                    <td><a href="<?php echo constant('URL') . 'consulta/verPersonal/' . $personal->matricula; ?>">Editar</a>  </td>
-                    <!-- <td><a href="<?php echo constant('URL') . 'consulta/eliminarPersonal/' . $personal->matricula; ?>">Eliminar</a> </td>-->
-                    <td><button class="bEliminar" data-matricula="<?php echo $personal->matricula; ?>">Eliminar</button></td>
+                    <td><a href="<?php echo constant('URL') . 'consulta/verPersonal/' . $personal->id_personal; ?>">Editar</a>  </td>
+                    <!-- <td><a href="<?php echo constant('URL') . 'consulta/eliminarPersonal/' . $personal->id_personal; ?>">Eliminar</a> </td>-->
+                    <td><button class="bEliminar" data-matricula="<?php echo $personal->id_personal; ?>">Eliminar</button></td>
                 </tr>
 
                 <?php } ?>
