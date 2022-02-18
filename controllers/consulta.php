@@ -33,12 +33,30 @@ class Consulta extends Controller{
         $estatus  = $_POST['estatus'];
         $apellido_paterno = $_POST['apellido_paterno'];
         $apellido_materno = $_POST['apellido_materno'];
+        $calle = $_POST['calle'];
+        $colonia = $_POST['colonia'];
+        $numero_exterior = $_POST['numero_exterior'];
+
+        $edad = $_POST['edad'];
+        $fecha_nacimiento = $_POST['fecha_nacimiento'];
+        $estado_civil = $_POST['estado_civil'];
+
+        $numero_hijos = $_POST['numero_hijos'];
+        $escolaridad = $_POST['escolaridad'];
 
         unset($_SESSION['id_verPersonal']);
 
         if($this->model->update(['id_personal' => $id_personal, 'nombre' => $nombre, 'estatus' => $estatus,
          'apellido_paterno' => $apellido_paterno,
-         'apellido_materno' => $apellido_materno] )){
+         'apellido_materno' => $apellido_materno,
+         'calle' => $calle,
+         'colonia' => $colonia,
+         'numero_exterior' => $numero_exterior,
+         'edad' => $edad,
+         'fecha_nacimiento' => $fecha_nacimiento,
+         'estado_civil' => $estado_civil,
+         'numero_hijos' => $numero_hijos,
+         'escolaridad' => $escolaridad] )){
             // actualizar Personal exito
             $personal = new Personal();
             $personal->id_personal = $id_personal;
@@ -46,6 +64,15 @@ class Consulta extends Controller{
             $personal->estatus = $estatus;
             $personal->apellido_paterno = $apellido_paterno;
             $personal->apellido_materno = $apellido_materno;
+            $personal->calle = $calle;
+            $personal->colonia = $colonia;
+            $personal->numero_exterior = $numero_exterior;
+
+            $personal->edad = $edad;
+            $personal->fecha_nacimiento = $fecha_nacimiento;
+            $personal->estado_civil = $estado_civil;
+            $personal->numero_hijos = $numero_hijos;
+            $personal->escolaridad = $escolaridad;
             // mostrar los que se actualizaron
             
             $this->view->personal = $personal;

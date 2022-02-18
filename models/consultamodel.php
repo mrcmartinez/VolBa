@@ -73,13 +73,25 @@ class ConsultaModel extends Model{
 
     public function update($item){
         $query = $this->db->connect()->prepare("UPDATE personal SET nombre = :nombre, estatus = :estatus, 
-        apellido_paterno = :apellido_paterno WHERE id_personal = :id_personal");
+        apellido_paterno = :apellido_paterno,apellido_materno = :apellido_materno, calle = :calle, colonia = :colonia,
+        numero_exterior = :numero_exterior, edad = :edad, fecha_nacimiento = :fecha_nacimiento, estado_civil = :estado_civil,
+        numero_hijos = :numero_hijos, escolaridad = :escolaridad WHERE id_personal = :id_personal");
         try{
             $query->execute([
                 'id_personal'=> $item['id_personal'],
                 'nombre'=> $item['nombre'],
                 'estatus'=> $item['estatus'],
-                'apellido_paterno'=> $item['apellido_paterno']
+                'apellido_paterno'=> $item['apellido_paterno'],
+                'apellido_materno'=> $item['apellido_materno'],
+                'calle'=> $item['calle'],
+                'colonia'=> $item['colonia'],
+                'numero_exterior'=> $item['numero_exterior'],
+
+                'edad'=> $item['edad'],
+                'fecha_nacimiento'=> $item['fecha_nacimiento'],
+                'estado_civil'=> $item['estado_civil'],
+                'numero_hijos'=> $item['numero_hijos'],
+                'escolaridad'=> $item['escolaridad']
             ]);
             return true;
         }catch(PDOException $e){
