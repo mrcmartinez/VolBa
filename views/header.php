@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="<?php echo constant('URL'); ?>assets/css/default.css">
 </head>
 <body>
